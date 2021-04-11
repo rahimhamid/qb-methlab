@@ -107,7 +107,7 @@ Citizen.CreateThread(function()
                 inRange = true
                 if #(pos - vector3(Config.Locations["exit"].coords.x, Config.Locations["exit"].coords.y, Config.Locations["exit"].coords.z)) < 1 then
                     DrawText3Ds(Config.Locations["exit"].coords.x, Config.Locations["exit"].coords.y, Config.Locations["exit"].coords.z, '~g~E~w~ - Leave methlab')
-                    if IsControlJustPressed(0, Keys["E"]) then
+                    if IsControlJustPressed(0, 38) then
                         ExitMethlab()
                     end
                 end
@@ -121,7 +121,7 @@ Citizen.CreateThread(function()
                 DrawMarker(2, Config.Locations["break"].coords.x, Config.Locations["break"].coords.y, Config.Locations["break"].coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.1, 222, 11, 11, 155, false, false, false, true, false, false, false)
                 if #(pos - vector3(Config.Locations["break"].coords.x, Config.Locations["break"].coords.y, Config.Locations["break"].coords.z)) < 1 then
                     DrawText3Ds(Config.Locations["break"].coords.x - 0.06, Config.Locations["break"].coords.y + 0.90, Config.Locations["break"].coords.z, '~g~G~w~ - Break Meth ')
-                    if IsControlJustPressed(0, Keys["G"]) then
+                    if IsControlJustPressed(0, 47) then
                         TriggerServerEvent("qb-methlab:server:breakMeth")
                     end
                 end
@@ -137,7 +137,7 @@ Citizen.CreateThread(function()
                     if not loadIngredients then
                         if #(pos - vector3(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y, Config.Tasks["Furnace"].coords.z)) < 1 then
                             DrawText3Ds(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y,  Config.Tasks["Furnace"].coords.z + 0.2, '[G] Load Ingredients')
-                            if IsControlJustPressed(0, Keys["G"]) then
+                            if IsControlJustPressed(0, 47) then
                                 TriggerServerEvent("qb-methlab:server:loadIngredients")
                             end
                         end
@@ -145,14 +145,14 @@ Citizen.CreateThread(function()
                         if not finishedMachine then
                             if #(pos - vector3(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y, Config.Tasks["Furnace"].coords.z)) < 1 then
                                 DrawText3Ds(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y,  Config.Tasks["Furnace"].coords.z + 0.2, '[E] Start Machine')
-                                if IsControlJustPressed(0, Keys["E"]) then
+                                if IsControlJustPressed(0, 38) then
                                     StartMachine()
                                 end
                             end
                         else
                             if #(pos - vector3(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y, Config.Tasks["Furnace"].coords.z)) < 1 then
                                 DrawText3Ds(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y,  Config.Tasks["Furnace"].coords.z + 0.2, '[E] Get Meth')
-                                if IsControlJustPressed(0, Keys["E"]) then
+                                if IsControlJustPressed(0, 38) then
                                     TriggerServerEvent("qb-methlab:server:receivemethtray")
                                     finishedMachine = false
                                     loadIngredients = false
@@ -364,7 +364,7 @@ Citizen.CreateThread(function()
                         -- if dealerIsHome then
                         DrawText3Ds(298.73,-335.98,4.81, '[E]')
 
-                        if IsControlJustPressed(0, Keys["E"]) then
+                        if IsControlJustPressed(0, 38) then
                             local ped = PlayerPedId()
                             local pos = GetEntityCoords(ped)
                     
@@ -1039,7 +1039,7 @@ end
 --                     if dist < 0.6 then
 --                         if not Config.Pharmacy["takeables"][spot].isBusy and not Config.Pharmacy["takeables"][spot].isDone then
 --                             DrawText3Ds(Config.Pharmacy["takeables"][spot].x, Config.Pharmacy["takeables"][spot].y,Config.Pharmacy["takeables"][spot].z, '~g~E~w~ To grab item')
---                             if IsControlJustPressed(0, Keys["E"]) then
+--                             if IsControlJustPressed(0, 38) then
 --                                 if CurrentCops >= 0 then
 --                                     TriggerServerEvent('qb-methlab:server:PoliceAlertMessage', 'People try to steal items at the Pharmacy in Palteo', pos, true)
 --                                         currentSpot = spot
