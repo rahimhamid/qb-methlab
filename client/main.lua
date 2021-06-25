@@ -80,12 +80,12 @@ Citizen.CreateThread(function()
     Wait(500)
     QBCore.Functions.TriggerCallback('qb-methlab:server:GetData', function(data)
         Config.CurrentLab = data.CurrentLab
-        print('Lab entry has been set to location: '..data.CurrentLab)
+        --print('Lab entry has been set to location: '..data.CurrentLab)
     end)
 
     CurrentTask = GetCurrentTask()
 
-    print('Current Task: '..CurrentTask)
+    --print('Current Task: '..CurrentTask)
 
     while true do
         SetClosestMethlab()
@@ -114,6 +114,20 @@ Citizen.CreateThread(function()
             end
         end
 
+        -- Laptop distance check
+        if InsideMethlab then
+            if #(pos - vector3(Config.Locations["laptop"].coords.x, Config.Locations["laptop"].coords.y, Config.Locations["laptop"].coords.z)) < 20 then
+                inRange = true
+                DrawMarker(2, Config.Locations["laptop"].coords.x, Config.Locations["laptop"].coords.y, Config.Locations["laptop"].coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.1, 222, 11, 11, 155, false, false, false, true, false, false, false)
+                if GetDistanceBetweenCoords(pos - vector3(Config.Locations["laptop"].coords.x, Config.Locations["laptop"].coords.y, Config.Locations["laptop"].coords.z)) < 1 then
+                    DrawText3Ds(Config.Locations["laptop"].coords.x - 0.04, Config.Locations["laptop"].coords.y + 0.45, Config.Locations["laptop"].coords.z, '~g~E~w~ - Use laptop')
+                    if IsControlJustPressed(0, 38) then
+                        OpenLaptop()
+                    end
+                end
+            end
+        end
+			
         -- break Meth
         if InsideMethlab then
             if #(pos - vector3(Config.Locations["break"].coords.x, Config.Locations["break"].coords.y, Config.Locations["break"].coords.z)) < 20 then
@@ -297,7 +311,7 @@ function ProcessMinigame()
 	end, function()
 
             QBCore.Functions.Notify("You loaded the ingredients!", "success")
-            machinetimer = 240
+            machinetimer = 120
             loadIngredients = true
             FailedAttemps = 0
             SucceededAttempts = 0
@@ -354,7 +368,7 @@ Citizen.CreateThread(function()
 
         nearMethDoor = false
        
-            local MethDoor = #(pos - vector3(298.73,-335.98,4.81))
+            local MethDoor = #(pos - vector3(321.72,-305.87,52.50))
 
             if MethDoor <= 6 then
                 nearMethDoor = true
@@ -362,7 +376,7 @@ Citizen.CreateThread(function()
                 if MethDoor <= 1 then
                     -- if not interacting then
                         -- if dealerIsHome then
-                        DrawText3Ds(298.73,-335.98,4.81, '[E]')
+                        DrawText3Ds(321.72,-305.87,52.50, '[E]')
 
                         if IsControlJustPressed(0, 38) then
                             local ped = PlayerPedId()
@@ -399,7 +413,7 @@ function OpenLaptop()
         local flag = 0
 
         SetEntityCoords(ped, Config.Locations["laptop"].coords.x, Config.Locations["laptop"].coords.y, Config.Locations["laptop"].coords.z - 0.98, 0.0, 0.0, 0.0, false)
-        SetEntityHeading(ped, Config.Locations["laptop"].coords.h)
+        SetEntityHeading(ped, Config.Locations["laptop"].coords.w)
 
         LoadAnimationDict(dict)
         TaskPlayAnim(ped, dict, anim, 2.0, 2.0, -1, flag, 0, false, false, false)
@@ -436,7 +450,7 @@ function EnterMethlab()
     DoScreenFadeOut(250)
     Citizen.Wait(250)
     SetEntityCoords(ped, Config.Locations["exit"].coords.x, Config.Locations["exit"].coords.y, Config.Locations["exit"].coords.z - 0.98)
-    SetEntityHeading(ped, Config.Locations["exit"].coords.h)
+    SetEntityHeading(ped, Config.Locations["exit"].coords.w)
     Citizen.Wait(1000)
     DoScreenFadeIn(250)
 end
@@ -453,7 +467,7 @@ function ExitMethlab()
     CurrentTask = GetCurrentTask()
 
     SetEntityCoords(ped, keypad.coords.x, keypad.coords.y, keypad.coords.z - 0.98)
-    SetEntityHeading(ped, keypad.coords.h)
+    SetEntityHeading(ped, keypad.coords.w)
 
     LoadAnimationDict(dict) 
 
@@ -464,7 +478,7 @@ function ExitMethlab()
     DoScreenFadeOut(250)
     Citizen.Wait(250)
     SetEntityCoords(ped, Config.Locations["laboratories"][Config.CurrentLab].coords.x, Config.Locations["laboratories"][Config.CurrentLab].coords.y, Config.Locations["laboratories"][Config.CurrentLab].coords.z - 0.98)
-    SetEntityHeading(ped, Config.Locations["laboratories"][Config.CurrentLab].coords.h)
+    SetEntityHeading(ped, Config.Locations["laboratories"][Config.CurrentLab].coords.w)
     InsideMethlab = false
     Citizen.Wait(1000)
     DoScreenFadeIn(250)
@@ -665,7 +679,7 @@ function CreateMethPed()
 end
 
 function DeleteCreatedPed()
-	print("Deleting Ped?")
+	--print("Deleting Ped?")
 	if DoesEntityExist(deliveryPed) then 
 		SetPedKeepTask(deliveryPed, false)
 		TaskSetBlockingOfNonTemporaryEvents(deliveryPed, false)
