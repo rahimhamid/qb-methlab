@@ -7,17 +7,17 @@ Config.CooldownActive = false
 Config.Locations = {
     ["laboratories"] = {
         [1] = {
-            coords = {x = 298.73, y = -335.98, z = 4.81, h = 94.5, r = 1.0},
+            coords = vector4(321.72, -305.87, 52.50, 94.5),
         },
     },
     ["exit"] = {
-        coords = {x = 997.01, y = -3200.65, z = -36.4, h = 275.5, r = 1.0}, 
+        coords = vector4(997.01, -3200.65, -36.4, 275.5), 
     },
     ["break"] = {
-        coords = {x = 1016.04, y = -3194.95, z = -38.99, h = 275.5, r = 1.0}, 
+        coords = vector4(1016.04, -3194.95, -38.99, 275.5), 
     },
     ["laptop"] = {
-        coords = {x = 1002.0, y = -3194.87, z = -39.0, h = 2.5, r = 1.0},
+        coords = vector4(1002.0, -3194.87, -39.0, 2.5),
         inUse = false,
     }
 }
@@ -31,7 +31,7 @@ Config.Tasks = {
         --     current = 0,
         --     needed = 1,
         -- },
-        coords = {x = 1005.72, y = -3200.38, z = -38.52, h = 124.5, r = 1.0},
+        coords = vector4(1005.72, -3200.38, -38.52, 124.5),
         timeremaining = 3,
         duration = 3,
         done = false,
