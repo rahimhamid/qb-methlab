@@ -39,7 +39,7 @@ AddEventHandler('qb-methlab:server:loadIngredients', function()
     local acetone = xPlayer.Functions.GetItemByName('acetone')
 
 	if xPlayer.PlayerData.items ~= nil then 
-        if (hydrochloricacid ~= nil and ephedrine ~= nil and acetone ~= nil) then 
+        if (hydrochloricacid > 0 and ephedrine > 0 and acetone > 0) then 
             if hydrochloricacid.amount >= 3 and ephedrine.amount >= 3 and acetone.amount >= 3 then 
 
                 xPlayer.Functions.RemoveItem("hydrochloricacid", 3, false)
@@ -72,7 +72,7 @@ AddEventHandler('qb-methlab:server:breakMeth', function()
     local puremethtray = xPlayer.Functions.GetItemByName('puremethtray')
 
 	if xPlayer.PlayerData.items ~= nil then 
-        if (meth ~= nil or puremethtray ~= nil) then 
+        if (meth > 0 or puremethtray > 0) then 
                 TriggerClientEvent("qb-methlab:client:breakMeth", source)
         else
             TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')   
@@ -136,7 +136,7 @@ AddEventHandler('qb-methlab:server:getmethtray', function(amount)
     local methtray = xPlayer.Functions.GetItemByName('methtray')
     local puremethtray = xPlayer.Functions.GetItemByName('puremethtray')
 
-    if puremethtray ~= nil then 
+    if puremethtray > 0 then 
         if puremethtray.amount >= 1 then 
             xPlayer.Functions.AddItem("puremeth", amount, false)
             TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['puremeth'], "add")
@@ -144,7 +144,7 @@ AddEventHandler('qb-methlab:server:getmethtray', function(amount)
             xPlayer.Functions.RemoveItem("puremethtray", 1, false)
             TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['puremethtray'], "remove")
         end
-    elseif methtray ~= nil then 
+    elseif methtray > 0 then 
         if methtray.amount >= 1 then 
             xPlayer.Functions.AddItem("meth", amount, false)
             TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['meth'], "add")
