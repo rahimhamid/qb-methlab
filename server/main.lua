@@ -1,12 +1,3 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-
-local ItemList = {
-    ["cash"] = "cash"
-}
-
--- Code
-
 Citizen.CreateThread(function()
     Config.CurrentLab = math.random(1, #Config.Locations["laboratories"])
     print('Lab entry has been set to location: '..Config.CurrentLab)
