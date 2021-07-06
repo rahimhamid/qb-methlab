@@ -610,30 +610,30 @@ function CreateMethVehicle()
 end
 
 function PoliceCall(vehicle)
+    local pos = GetEntityCoords(PlayerPedId())
+    local chance = 20
+    local msg = ""
+    local s1, s2 = Citizen.InvokeNative(0x2EB41072B4C1E4C0, pos.x, pos.y, pos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt())
+    local streetLabel = GetStreetNameFromHashKey(s1)
+    local street2 = GetStreetNameFromHashKey(s2)
 
-            local pos = GetEntityCoords(PlayerPedId())
-            local chance = 20
-			local msg = ""
-			local s1, s2 = Citizen.InvokeNative(0x2EB41072B4C1E4C0, pos.x, pos.y, pos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt())
-			local streetLabel = GetStreetNameFromHashKey(s1)
-			local street2 = GetStreetNameFromHashKey(s2)
-			if street2 ~= nil and street2 ~= "" then 
-				streetLabel = streetLabel .. " " .. street2
-			end
-			local alertTitle = ""
+    if street2 ~= nil and street2 ~= "" then 
+        streetLabel = streetLabel .. " " .. street2
+    end
 
-				local vehicle = vehicle
-				local modelName = GetEntityModel(vehicle)
-				if QBCore.Shared.VehicleModels[modelName] ~= nil then
-					Name = QBCore.Shared.Vehicles[QBCore.Shared.VehicleModels[modelName]["model"]]["brand"] .. ' ' .. QBCore.Shared.Vehicles[QBCore.Shared.VehicleModels[modelName]["model"]]["name"]
-				else
-					Name = "Unknown"
-				end
-				local modelPlate = GetVehicleNumberPlateText(vehicle)
-				local msg = "10-31 | Vehicle Spotted Selling Drugs At " ..streetLabel.. ". Vehicle: " .. Name .. ", License Plate: " .. modelPlate
-				local alertTitle = " Drug Selling"
-				TriggerServerEvent("police:server:VehicleCall", pos, msg, alertTitle, streetLabel, modelPlate, Name)
+    local alertTitle = ""
+    local vehicle = vehicle
+    local vehname = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)):lower()
+    if QBCore.Shared.Vehicles[vehname] ~= nil then
+        Name = QBCore.Shared.Vehicles[vehname]["model"]["brand"] .. ' ' .. QBCore.Shared.Vehicles[vehname]["model"]["name"]
+    else
+        Name = "Unknown"
+    end
 
+    local modelPlate = GetVehicleNumberPlateText(vehicle)
+    local msg = "10-31 | Vehicle Spotted Selling Drugs At " ..streetLabel.. ". Vehicle: " .. Name .. ", License Plate: " .. modelPlate
+    local alertTitle = " Drug Selling"
+    TriggerServerEvent("police:server:VehicleCall", pos, msg, alertTitle, streetLabel, modelPlate, Name)
 end
 
 function CreateMethPed()
