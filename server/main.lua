@@ -208,3 +208,44 @@ AddEventHandler('qb-methlab:server:PoliceAlertMessage', function(msg, coords, bl
         end
     end
 end)
+
+-- Meth Sell-- 
+local MethList = {
+    ["puremeth"] = math.random(250,500),
+    ["meth"] = math.random(250,500)
+}
+QBCore.Functions.CreateCallback('qb-methlab:server:getItems', function(source, cb)
+    local retval = 0
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player.PlayerData.items ~= nil and next(Player.PlayerData.items) ~= nil then 
+        for k, v in pairs(Player.PlayerData.items) do 
+            if Player.PlayerData.items[k] ~= nil then 
+                if MethList[Player.PlayerData.items[k].name] ~= nil then 
+                    retval = retval + (MethList[Player.PlayerData.items[k].name] * Player.PlayerData.items[k].amount)
+                end
+            end
+        end
+    end
+    cb(retval)
+end)
+
+RegisterServerEvent("qb-methlab:server:sellMeth")
+AddEventHandler("qb-methlab:server:sellMeth", function()
+    local src = source
+    local price = 0
+
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player.PlayerData.items ~= nil and next(Player.PlayerData.items) ~= nil then 
+        for k, v in pairs(Player.PlayerData.items) do 
+            if Player.PlayerData.items[k] ~= nil then 
+                if MethList[Player.PlayerData.items[k].name] ~= nil then 
+                    price = price + (MethList[Player.PlayerData.items[k].name] * Player.PlayerData.items[k].amount)
+                    Player.Functions.RemoveItem(Player.PlayerData.items[k].name, Player.PlayerData.items[k].amount, k)
+                    TriggerClientEvent('inventory:client:ItemBox', src, Player.PlayerData.items[k].name, "remove")
+                end
+            end
+        end
+        Player.Functions.AddMoney("cash", price, "Meth Sell")
+        TriggerClientEvent('QBCore:Notify', src, "You sell your meth's for $"..tonumber(price))
+    end
+end)
