@@ -169,7 +169,30 @@ Citizen.CreateThread(function()
                 end
             end
         end
-
+	-- Meth Sell --
+		if #(pos - Config.MethSell) < 5.0 then
+		    inRange = true
+		    if #(pos - Config.MethSell) < 1.5 then
+			DrawText3Ds(Config.MethSell.x, Config.MethSell.y, Config.MethSell.z, "~g~E~w~ - Sell Meth")
+			    if IsControlJustReleased(0, 38) then
+				QBCore.Functions.TriggerCallback('qb-methlab:server:getItems', function(result)
+				    if result ~= 0 then
+					TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
+					QBCore.Functions.Progressbar("sell_meth", "Negotiating the price...", math.random(15,25), false, true, {}, {}, {}, {}, function() -- Done
+					    ClearPedTasks(ped)
+					    TriggerServerEvent("qb-methlab:server:sellMeth")
+					end, function() -- Cancel
+					    ClearPedTasks(ped)
+					    QBCore.Functions.Notify("Canceled..", "error")
+					end)
+				    else
+					QBCore.Functions.Notify("You don't have enough meth to sell...", "error")
+				    end
+				end)
+			    end
+		    end
+		end
+	    -- END Meth Sell --
         if not inRange then
             Citizen.Wait(1000)
         end
