@@ -62,7 +62,7 @@ Config.BigRewarditem = "security_card_02" -- Put a rare item here which will hav
 Config.MethCars = "CHECK THE CODE" -- Cars
 
 Config.DropOffs = "CHECK THE CODE" -- Drop off spots
-
+Config.MethSell = vector3(1532.0511, 1728.1282, 109.9181)
 
 --Robbery
 
