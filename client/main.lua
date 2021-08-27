@@ -1,4 +1,4 @@
-local InsideMethlab = true
+local InsideMethlab = false
 local ClosestMethlab = 0
 local loadIngredients = false
 
