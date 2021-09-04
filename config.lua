@@ -4,6 +4,10 @@ Config.MinZOffset = 30
 Config.CurrentLab = 0
 Config.CooldownActive = false
 
+Config.HydrochloricAcid = 3
+Config.Ephedrine = 3
+Config.Acetone  = 3
+
 Config.FurnaceTimer = 5
 
 Config.BreakMethTimer = math.random(10000, 12000)
