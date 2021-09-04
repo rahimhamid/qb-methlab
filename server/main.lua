@@ -29,7 +29,7 @@ AddEventHandler('qb-methlab:server:loadIngredients', function()
     local ephedrine = Player.Functions.GetItemByName('ephedrine')
     local acetone = Player.Functions.GetItemByName('acetone')
 	if Player.PlayerData.items ~= nil then 
-        if (hydrochloricacid ~= nil and ephedrine ~= nil and acetone ~= nil) then 
+        if (hydrochloricacid ~= nil and ephedrine ~= nil and acetone ~= nil) then
             if hydrochloricacid.amount >= 0 and ephedrine.amount >= 0 and acetone.amount >= 0 then 
                 Player.Functions.RemoveItem("hydrochloricacid", 3, false)
                 TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['hydrochloricacid'], "remove")
@@ -50,13 +50,13 @@ AddEventHandler('qb-methlab:server:CheckIngredients', function()
     local acetone = Player.Functions.GetItemByName('acetone')
 	if Player.PlayerData.items ~= nil then 
         if (hydrochloricacid ~= nil and ephedrine ~= nil and acetone ~= nil) then 
-            if hydrochloricacid.amount >= 0 and ephedrine.amount >= 0 and acetone.amount >= 0 then 
+            if hydrochloricacid.amount >= 3 and ephedrine.amount >= 3 and acetone.amount >= 3 then 
                 TriggerClientEvent("qb-methlab:client:loadIngredients", source)
             else
-                TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')   
+                TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')
             end
         else
-            TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')   
+            TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')
         end
 	else
 		TriggerClientEvent('QBCore:Notify', source, "You Have Nothing...", "error")
