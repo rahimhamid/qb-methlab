@@ -132,7 +132,7 @@ Citizen.CreateThread(function()
                         end
                     end
                 else
-                    DrawText3Ds(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y, Config.Tasks["Furnace"].coords.z - 0.4, 'Ready over '..machinetimer..'s')
+                    DrawText3Ds(Config.Tasks["Furnace"].coords.x, Config.Tasks["Furnace"].coords.y, Config.Tasks["Furnace"].coords.z - 0.4, 'Ready in '..machinetimer..'s')
                 end
             end
         end

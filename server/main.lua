@@ -31,11 +31,11 @@ AddEventHandler('qb-methlab:server:loadIngredients', function()
 	if Player.PlayerData.items ~= nil then 
         if (hydrochloricacid ~= nil and ephedrine ~= nil and acetone ~= nil) then
             if hydrochloricacid.amount >= 0 and ephedrine.amount >= 0 and acetone.amount >= 0 then 
-                Player.Functions.RemoveItem("hydrochloricacid", 3, false)
+                Player.Functions.RemoveItem("hydrochloricacid", Config.HydrochloricAcid, false)
                 TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['hydrochloricacid'], "remove")
-                Player.Functions.RemoveItem("ephedrine", 3, false)
+                Player.Functions.RemoveItem("ephedrine", Config.Ephedrine, false)
                 TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['ephedrine'], "remove")
-                Player.Functions.RemoveItem("acetone", 3, false)
+                Player.Functions.RemoveItem("acetone", Config.Acetone, false)
                 TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['acetone'], "remove")
             end
         end
@@ -50,7 +50,7 @@ AddEventHandler('qb-methlab:server:CheckIngredients', function()
     local acetone = Player.Functions.GetItemByName('acetone')
 	if Player.PlayerData.items ~= nil then 
         if (hydrochloricacid ~= nil and ephedrine ~= nil and acetone ~= nil) then 
-            if hydrochloricacid.amount >= 3 and ephedrine.amount >= 3 and acetone.amount >= 3 then 
+            if hydrochloricacid.amount >= Config.HydrochloricAcid and ephedrine.amount >= Config.Ephedrine and acetone.amount >= Config.Acetone then 
                 TriggerClientEvent("qb-methlab:client:loadIngredients", source)
             else
                 TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')
@@ -59,7 +59,7 @@ AddEventHandler('qb-methlab:server:CheckIngredients', function()
             TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')
         end
 	else
-		TriggerClientEvent('QBCore:Notify', source, "You Have Nothing...", "error")
+		TriggerClientEvent('QBCore:Notify', source, "You have nothing...", "error")
 	end
 end)
 
@@ -76,7 +76,7 @@ AddEventHandler('qb-methlab:server:breakMeth', function()
             TriggerClientEvent('QBCore:Notify', source, "You do not have the correct items", 'error')   
         end
 	else
-		TriggerClientEvent('QBCore:Notify', source, "You Have Nothing...", "error")
+		TriggerClientEvent('QBCore:Notify', source, "You Have nothing...", "error")
 	end
 end)
 
