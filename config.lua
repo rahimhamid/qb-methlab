@@ -15,11 +15,11 @@ Config.BreakMethTimer = math.random(10000, 12000)
 Config.Locations = {
     ["laboratories"] = {
         [1] = {
-            coords = vector4(321.72, -305.87, 52.50, 94.5),
+            coords = vector4(346.79, 3405.47, 36.85, 202.96),
         },
     },
     ["exit"] = {
-        coords = vector4(997.01, -3200.65, -36.4, 90.4), 
+        coords = vector4(903.2, -3182.37, 97.05, 98.42), 
     },
     ["break"] = {
         coords = vector4(1016.04, -3194.95, -38.99, 275.5), 
